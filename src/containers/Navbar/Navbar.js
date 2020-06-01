@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import makeStyle from "@material-ui/core/styles/makeStyles";
 import AppBar from "@material-ui/core/AppBar";
@@ -60,8 +61,17 @@ const Navbar = (props) => {
           anchor="left"
         >
           <List className={classes.list} onClick={closeHandler}>
-            <ListItem>
-              <ListItemText>Movies</ListItemText>
+            <ListItem onClick={closeHandler} component={Link} to="/nowplaying">
+              <ListItemText>Now Playing</ListItemText>
+            </ListItem>
+            <ListItem onClick={closeHandler} component={Link} to="/popular">
+              <ListItemText>popular</ListItemText>
+            </ListItem>
+            <ListItem onClick={closeHandler} component={Link} to="/toprated">
+              <ListItemText>Top Rated</ListItemText>
+            </ListItem>
+            <ListItem onClick={closeHandler} component={Link} to="/upcoming">
+              <ListItemText>Upcoming</ListItemText>
             </ListItem>
           </List>
         </Drawer>

@@ -5,7 +5,10 @@ import { Route, Switch, Redirect, BrowserRouter } from "react-router-dom";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 import Navbar from "./containers/Navbar/Navbar";
-import Movie from "./containers/Movie/Movie";
+import NowPlaying from "./containers/Movie/NowPlaying/NowPlaying";
+import Popular from "./containers/Movie/NowPlaying/Popular";
+import Toprated from "./containers/Movie/NowPlaying/Toprated";
+import Upcoming from "./containers/Movie/NowPlaying/Upcoming";
 // import ErrorHandler from "./components/ErrorHandler/ErrorHandler";
 import SingleMovie from "./containers/Movie/SingleMovie";
 
@@ -53,9 +56,12 @@ function App() {
         <Navbar />
         <div className="container">
           <Switch>
-            <Route path="/" exact component={Movie} />
+            <Route path="/nowplaying" exact component={NowPlaying} />
+            <Route path="/popular" exact component={Popular} />
+            <Route path="/toprated" exact component={Toprated} />
+            <Route path="/upcoming" exact component={Upcoming} />
             <Route path="/movie/:movieId" exact component={SingleMovie} />
-            <Redirect to="/" />
+            <Redirect to="/nowplaying" />
           </Switch>
         </div>
       </MuiThemeProvider>

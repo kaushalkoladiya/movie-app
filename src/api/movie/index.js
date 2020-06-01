@@ -28,6 +28,45 @@ export const nowPlaying = async (pageNumber) => {
   }
 };
 
+export const popular = async (pageNumber) => {
+  try {
+    const { data } = await axios.get(
+      "https://api.themoviedb.org/3/movie/popular?api_key=d1f867f141558abd4dfcd4f09b45f4fc&language=en-US&page=" +
+        pageNumber
+    );
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const toprated = async (pageNumber) => {
+  try {
+    const { data } = await axios.get(
+      "https://api.themoviedb.org/3/movie/toprated?api_key=d1f867f141558abd4dfcd4f09b45f4fc&language=en-US&page=" +
+        pageNumber
+    );
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const upcoming = async (pageNumber) => {
+  try {
+    const { data } = await axios.get(
+      "https://api.themoviedb.org/3/movie/upcoming?api_key=d1f867f141558abd4dfcd4f09b45f4fc&language=en-US&page=" +
+        pageNumber
+    );
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const images = async (movieId) => {
   try {
     const { data } = await axios.get(
