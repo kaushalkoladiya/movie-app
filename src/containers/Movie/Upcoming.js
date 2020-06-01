@@ -3,12 +3,12 @@ import React, { useEffect, useState, Fragment } from "react";
 import Typography from "@material-ui/core/Typography";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-import { nowPlaying } from "../../../api/movie";
+import { upcoming } from "../../api/movie";
 import Grid from "@material-ui/core/Grid";
-import Thumbnail from "../../../components/Movie/Thumbnail";
-import Pagination from "../../../components/Pagination/Pagination";
+import Thumbnail from "../../components/Movie/Thumbnail";
+import Pagination from "../../components/Pagination/Pagination";
 
-const NowPlaying = (props) => {
+const Upcoming = (props) => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -16,7 +16,7 @@ const NowPlaying = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const { results, page: pageNo, total_pages } = await nowPlaying(page);
+      const { results, page: pageNo, total_pages } = await upcoming(page);
       setMovies(results);
       setPage(pageNo);
       setTotalpages(total_pages);
@@ -33,7 +33,7 @@ const NowPlaying = (props) => {
     <Grid container>
       <Grid item sm={12} xs={12}>
         <Typography variant="h4" style={{ margin: 10 }}>
-          Now Playing
+          Upcoming
         </Typography>
       </Grid>
       {loading ? (
@@ -62,4 +62,4 @@ const NowPlaying = (props) => {
   );
 };
 
-export default NowPlaying;
+export default Upcoming;

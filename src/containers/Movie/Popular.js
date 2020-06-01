@@ -3,12 +3,13 @@ import React, { useEffect, useState, Fragment } from "react";
 import Typography from "@material-ui/core/Typography";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-import { toprated } from "../../../api/movie";
-import Grid from "@material-ui/core/Grid";
-import Thumbnail from "../../../components/Movie/Thumbnail";
-import Pagination from "../../../components/Pagination/Pagination";
+import { popular } from "../../api/movie";
 
-const TopRated = (props) => {
+import Grid from "@material-ui/core/Grid";
+import Thumbnail from "../../components/Movie/Thumbnail";
+import Pagination from "../../components/Pagination/Pagination";
+
+const Popular = (props) => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -16,7 +17,7 @@ const TopRated = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const { results, page: pageNo, total_pages } = await toprated(page);
+      const { results, page: pageNo, total_pages } = await popular(page);
       setMovies(results);
       setPage(pageNo);
       setTotalpages(total_pages);
@@ -33,7 +34,7 @@ const TopRated = (props) => {
     <Grid container>
       <Grid item sm={12} xs={12}>
         <Typography variant="h4" style={{ margin: 10 }}>
-          Top Rated
+          Popular
         </Typography>
       </Grid>
       {loading ? (
@@ -62,4 +63,4 @@ const TopRated = (props) => {
   );
 };
 
-export default TopRated;
+export default Popular;

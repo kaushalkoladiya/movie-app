@@ -6,8 +6,8 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-import Thumbnail from "./Thumbnail";
-import Pagination from "../Pagination/Pagination";
+import Thumbnail from "../../components/Movie/Thumbnail";
+import Pagination from "../../components/Pagination/Pagination";
 
 import { recommendations } from "../../api/movie";
 

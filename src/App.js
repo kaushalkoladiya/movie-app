@@ -5,12 +5,12 @@ import { Route, Switch, Redirect, BrowserRouter } from "react-router-dom";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 import Navbar from "./containers/Navbar/Navbar";
-import NowPlaying from "./containers/Movie/NowPlaying/NowPlaying";
-import Popular from "./containers/Movie/NowPlaying/Popular";
-import Toprated from "./containers/Movie/NowPlaying/Toprated";
-import Upcoming from "./containers/Movie/NowPlaying/Upcoming";
+import NowPlaying from "./containers/Movie/NowPlaying";
+import Popular from "./containers/Movie/Popular";
+import Toprated from "./containers/Movie/Toprated";
+import Upcoming from "./containers/Movie/Upcoming";
 // import ErrorHandler from "./components/ErrorHandler/ErrorHandler";
-import SingleMovie from "./containers/Movie/SingleMovie";
+import SingleMovie from "./containers/SingleMovie/SingleMovie";
 
 const theme = createMuiTheme({
   palette: {

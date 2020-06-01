@@ -1,9 +1,9 @@
 import React, { Fragment } from "react";
 
-import Details from "../../components/Movie/Details";
-import Images from "../../components/Movie/Images";
-import Credits from "../../components/Movie/Credits";
-import Recommendations from "../../components/Movie/Recommendations";
+import Details from "./Details";
+import Images from "./Images";
+import Credits from "./Credits";
+import Recommendations from "./Recommendations";
 
 const SingleMovie = (props) => {
   return (

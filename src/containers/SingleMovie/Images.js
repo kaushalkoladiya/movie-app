@@ -8,7 +8,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Paper from "@material-ui/core/Paper";
 
 import { images } from "../../api/movie";
-import Poster from "../Image/Poster";
+import Poster from "../../components/Image/Poster";
 
 const styles = {
   container: {

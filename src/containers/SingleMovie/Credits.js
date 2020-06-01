@@ -8,7 +8,7 @@ import Paper from "@material-ui/core/Paper";
 
 import { credits } from "../../api/movie";
 
-import Credit from "../Image/Credit";
+import Credit from "../../components/Image/Credit";
 
 const styles = {
   container: {
