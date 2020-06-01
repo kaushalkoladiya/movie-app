@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import makeStyle from "@material-ui/core/styles/makeStyles";
+import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";
 import IconButton from "@material-ui/core/IconButton";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -53,6 +54,9 @@ const Navbar = (props) => {
           onClick={openHandler}
         >
           <MenuIcon />
+          <Typography variant="h4" style={{ marginLeft: 20 }}>
+            Movies 4 U
+          </Typography>
         </IconButton>
         <Drawer
           transitionDuration={300}
