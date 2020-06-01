@@ -54,10 +54,8 @@ const Navbar = (props) => {
           onClick={openHandler}
         >
           <MenuIcon />
-          <Typography variant="h4" style={{ marginLeft: 20 }}>
-            Movies 4 U
-          </Typography>
         </IconButton>
+        <Typography variant="h4">Movies 4 U</Typography>
         <Drawer
           transitionDuration={300}
           open={open}
