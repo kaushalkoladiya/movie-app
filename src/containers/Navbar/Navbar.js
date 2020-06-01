@@ -79,7 +79,7 @@ const Navbar = (props) => {
             </ListItem>
           </List>
         </Drawer>
-        <div>
+        {/* <div>
           <InputBase
             className={classes.input}
             placeholder="Search"
@@ -92,7 +92,7 @@ const Navbar = (props) => {
           >
             <SearchIcon />
           </IconButton>
-        </div>
+        </div> */}
       </Toolbar>
     </AppBar>
   );
