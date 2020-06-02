@@ -8,6 +8,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Paper from "@material-ui/core/Paper";
 
 import Image from "../../components/Image/Image";
+import ErrorHandler from "../ErrorHandler/ErrorHandler";
 
 import { details } from "../../api/movie";
 
@@ -40,17 +41,29 @@ const styles = {
 const Details = (props) => {
   const [loading, setLoading] = useState(true);
   const [movieDetails, setMovieDetails] = useState({});
+  const [hasError, setHasError] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
-      const data = await details(props.movieId);
-      setMovieDetails(data);
-      setLoading(false);
+      try {
+        const data = await details(props.movieId);
+        console.log(data);
+        if (data) {
+          setMovieDetails(data);
+          setLoading(false);
+        }
+        throw new Error("Can't fetch data");
+      } catch (error) {
+        setHasError(true);
+      }
     };
     fetchData();
   }, [props.movieId]);
 
   return (
     <Fragment>
+      {hasError && <ErrorHandler />}
+
       {loading ? (
         <div style={{ margin: "50px auto 50px auto", textAlign: "center" }}>
           <CircularProgress
@@ -78,7 +91,7 @@ const Details = (props) => {
                 ))}
               </div>
               <Typography variant="body2">
-                Language : {movieDetails.original_language}
+                Language : <code>{movieDetails.original_language}</code>
               </Typography>
               <div
                 style={{

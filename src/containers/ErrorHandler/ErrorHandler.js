@@ -5,13 +5,9 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { useTheme } from "@material-ui/core/styles";
 
 const ErrorHandler = () => {
   const [open, setOpen] = useState(true);
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const closeHandler = () => {
     setOpen(false);
   };
@@ -19,14 +15,16 @@ const ErrorHandler = () => {
   return (
     <div>
       <Dialog
-        fullScreen={fullScreen}
+        maxWidth="md"
         open={open}
         onClose={closeHandler}
         aria-labelledby="error-handler"
       >
         <DialogTitle id="error-handler">Notice</DialogTitle>
         <DialogContent>
-          <DialogContentText>Primary server is unavailable</DialogContentText>
+          <DialogContentText style={{ color: "indianred" }}>
+            Primary server is unavailable
+          </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={closeHandler} color="inherit">

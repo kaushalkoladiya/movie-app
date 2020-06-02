@@ -6,3 +6,7 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+.MuiPagination-ul {
+  justify-content: center;
+}

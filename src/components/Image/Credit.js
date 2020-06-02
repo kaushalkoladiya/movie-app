@@ -12,11 +12,11 @@ const style = {
   },
 };
 
-const credit = ({ imagePath, name, classes }) => (
-  <Grid item xl={1} lg={2} sm={4} xs={12} className={classes.movie}>
-    <Image path={imagePath} />
-    <Fragment variant="h6" className={classes.title}>
-      {name}
+const credit = (props) => (
+  <Grid item xl={1} lg={2} sm={4} xs={12} className={props.classes.movie}>
+    <Image path={props.imagePath} />
+    <Fragment variant="h6" className={props.classes.title}>
+      {props.name}
     </Fragment>
   </Grid>
 );

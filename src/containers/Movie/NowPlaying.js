@@ -7,20 +7,26 @@ import { nowPlaying } from "../../api/movie";
 import Grid from "@material-ui/core/Grid";
 import Thumbnail from "../../components/Movie/Thumbnail";
 import Pagination from "../../components/Pagination/Pagination";
+import ErrorHandler from "../ErrorHandler/ErrorHandler";
 
 const NowPlaying = (props) => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalpages] = useState(null);
+  const [hasError, setHasError] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
-      const { results, page: pageNo, total_pages } = await nowPlaying(page);
-      setMovies(results);
-      setPage(pageNo);
-      setTotalpages(total_pages);
-      setLoading(false);
+      try {
+        setLoading(true);
+        const { results, page: pageNo, total_pages } = await nowPlaying(page);
+        setMovies(results.filter((movie) => movie.poster_path !== null));
+        setPage(pageNo);
+        setTotalpages(total_pages);
+        setLoading(false);
+      } catch (error) {
+        setHasError(true);
+      }
     };
     fetchData();
   }, [page]);
@@ -31,6 +37,8 @@ const NowPlaying = (props) => {
 
   return (
     <Grid container>
+      {hasError && <ErrorHandler />}
+
       <Grid item sm={12} xs={12}>
         <Typography variant="h4" style={{ margin: 10 }}>
           Now Playing

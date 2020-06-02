@@ -9,6 +9,7 @@ import Paper from "@material-ui/core/Paper";
 
 import { images } from "../../api/movie";
 import Poster from "../../components/Image/Poster";
+import ErrorHandler from "../ErrorHandler/ErrorHandler";
 
 const styles = {
   container: {
@@ -53,17 +54,27 @@ const styles = {
 const Images = (props) => {
   const [loading, setLoading] = useState(true);
   const [imagesData, setImagesData] = useState({});
+  const [hasError, setHasError] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
-      const data = await images(props.movieId);
-      setImagesData(data.posters);
-      setLoading(false);
+      try {
+        const data = await images(props.movieId);
+        setImagesData(
+          data.posters.filter((poster) => poster.file_path !== null)
+        );
+        setLoading(false);
+      } catch (error) {
+        setHasError(true);
+      }
     };
     fetchData();
   }, [props.movieId]);
 
   return (
     <Fragment>
+      {hasError && <ErrorHandler />}
+
       {loading ? (
         <div style={{ margin: "50px auto 50px auto", textAlign: "center" }}>
           <CircularProgress

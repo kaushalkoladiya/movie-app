@@ -8,6 +8,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 
 import Thumbnail from "../../components/Movie/Thumbnail";
 import Pagination from "../../components/Pagination/Pagination";
+import ErrorHandler from "../ErrorHandler/ErrorHandler";
 
 import { recommendations } from "../../api/movie";
 
@@ -38,16 +39,22 @@ const Recommendations = (props) => {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalpages] = useState(null);
+  const [hasError, setHasError] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
-      const { results, page: pageNo, total_pages } = await recommendations(
-        props.movieId,
-        page
-      );
-      setMovies(results);
-      setPage(pageNo);
-      setTotalpages(total_pages);
-      setLoading(false);
+      try {
+        const { results, page: pageNo, total_pages } = await recommendations(
+          props.movieId,
+          page
+        );
+        setMovies(results.filter((movie) => movie.poster_path !== null));
+        setPage(pageNo);
+        setTotalpages(total_pages);
+        setLoading(false);
+      } catch (error) {
+        setHasError(true);
+      }
     };
     fetchData();
   }, [props.movieId, page]);
@@ -58,6 +65,8 @@ const Recommendations = (props) => {
 
   return (
     <Fragment>
+      {hasError && <ErrorHandler />}
+
       {loading ? (
         <div style={{ margin: "50px auto 50px auto", textAlign: "center" }}>
           <CircularProgress

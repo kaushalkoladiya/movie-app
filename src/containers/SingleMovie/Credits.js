@@ -9,6 +9,7 @@ import Paper from "@material-ui/core/Paper";
 import { credits } from "../../api/movie";
 
 import Credit from "../../components/Image/Credit";
+import ErrorHandler from "../ErrorHandler/ErrorHandler";
 
 const styles = {
   container: {
@@ -40,18 +41,26 @@ const Credits = (props) => {
   const [loading, setLoading] = useState(true);
   const [cast, setCast] = useState([]);
   const [crew, setCrew] = useState([]);
+  const [hasError, setHasError] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
-      const data = await credits(props.movieId);
-      setCast(data.cast);
-      setCrew(data.crew);
-      setLoading(false);
+      try {
+        const data = await credits(props.movieId);
+        setCast(data.cast.filter((data) => data.profile_path !== null));
+        setCrew(data.crew.filter((data) => data.profile_path !== null));
+        setLoading(false);
+      } catch (error) {
+        setHasError(true);
+      }
     };
     fetchData();
   }, [props.movieId]);
 
   return (
     <Fragment>
+      {hasError && <ErrorHandler />}
+
       {loading ? (
         <div style={{ margin: "50px auto 50px auto", textAlign: "center" }}>
           <CircularProgress
@@ -67,8 +76,12 @@ const Credits = (props) => {
           </Typography>
           <Paper className={props.classes.paper}>
             <Grid container spacing={2}>
-              {cast.map((image) => (
-                <Credit imagePath={image.profile_path} name={image.name} />
+              {cast.map((image, key) => (
+                <Credit
+                  key={key}
+                  imagePath={image.profile_path}
+                  name={image.name}
+                />
               ))}
             </Grid>
           </Paper>
@@ -77,8 +90,12 @@ const Credits = (props) => {
           </Typography>
           <Paper className={props.classes.paper}>
             <Grid container spacing={2}>
-              {crew.map((image) => (
-                <Credit imagePath={image.profile_path} name={image.name} />
+              {crew.map((image, key) => (
+                <Credit
+                  key={key}
+                  imagePath={image.profile_path}
+                  name={image.name}
+                />
               ))}
             </Grid>
           </Paper>
